@@ -28,7 +28,7 @@ const ImageToText = () => {
       const result = await Tesseract.recognize(selectedImage, 'eng', {
         logger: m => console.log(m)
       })
-      
+
       setExtractedText(result.data.text)
     } catch (error) {
       console.error('Error extracting text:', error)
@@ -77,13 +77,12 @@ const ImageToText = () => {
         {/* Image Upload Section */}
         <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 shadow-xl">
           <h3 className="text-2xl font-semibold text-white mb-4">Upload Image</h3>
-          
+
           <div
-            className={`border-2 border-dashed rounded-xl p-6 text-center transition-all duration-300 ${
-              selectedImage 
-                ? 'border-purple-400 bg-purple-500/10' 
+            className={`border-2 border-dashed rounded-xl p-6 text-center transition-all duration-300 ${selectedImage
+                ? 'border-purple-400 bg-purple-500/10'
                 : 'border-white/30 hover:border-purple-400 hover:bg-white/5'
-            }`}
+              }`}
             onDrop={handleDrop}
             onDragOver={handleDragOver}
           >
@@ -135,11 +134,10 @@ const ImageToText = () => {
               <button
                 onClick={handleExtractText}
                 disabled={isExtracting}
-                className={`px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed ${
-                  isExtracting
+                className={`px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed ${isExtracting
                     ? 'bg-gray-500 text-white'
                     : 'bg-gradient-to-r from-green-500 to-blue-500 text-white shadow-lg shadow-green-500/25 hover:shadow-xl hover:shadow-green-500/40'
-                }`}
+                  }`}
               >
                 {isExtracting ? (
                   <div className="flex items-center justify-center space-x-2">
@@ -157,7 +155,7 @@ const ImageToText = () => {
         {/* Extracted Text Section */}
         <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 shadow-xl">
           <h3 className="text-2xl font-semibold text-white mb-4">Extracted Text</h3>
-          
+
           {extractedText ? (
             <div className="bg-white/20 rounded-xl p-4 border border-white/30">
               <div className="max-h-96 overflow-y-auto">
@@ -168,10 +166,10 @@ const ImageToText = () => {
             </div>
           ) : (
             <div className="bg-white/20 rounded-xl p-8 border border-white/30 text-center">
-              <div className="text-4xl text-white/50 mb-2">📝</div>
+              <div className="text-4xl text-white/50 mb-2"></div>
               <p className="text-white/70">
-                {selectedImage 
-                  ? 'Click "Extract Text" to get started' 
+                {selectedImage
+                  ? 'Click "Extract Text" to get started'
                   : 'Upload an image to extract text'
                 }
               </p>
