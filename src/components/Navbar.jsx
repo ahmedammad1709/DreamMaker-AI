@@ -34,6 +34,16 @@ const Navbar = ({ activeView, setActiveView }) => {
             >
               Image to Text
             </button>
+            <button
+              onClick={() => setActiveView('remove-bg')}
+              className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 ${
+                activeView === 'remove-bg'
+                  ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg shadow-purple-500/25'
+                  : 'text-white/70 hover:text-white hover:bg-white/20'
+              }`}
+            >
+              Remove Background
+            </button>
           </div>
         </div>
       </div>

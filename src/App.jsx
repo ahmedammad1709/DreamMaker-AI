@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Navbar from './components/Navbar'
 import TextToImage from './components/TextToImage'
 import ImageToText from './components/ImageToText'
+import RemoveBG from './components/RemoveBG'
 import Footer from './components/Footer'
 
 function App() {
@@ -10,15 +11,17 @@ function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       <Navbar activeView={activeView} setActiveView={setActiveView} />
-      
+
       <main className="container mx-auto px-4 py-8 min-h-[calc(100vh-200px)]">
         {activeView === 'text-to-image' ? (
           <TextToImage />
-        ) : (
+        ) : activeView === 'image-to-text' ? (
           <ImageToText />
+        ) : (
+          <RemoveBG />
         )}
       </main>
-      
+
       <Footer />
     </div>
   )
