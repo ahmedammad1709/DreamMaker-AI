@@ -1,30 +1,27 @@
-import formidable from "formidable";
-import fs from "fs";
+export const config = { runtime: "edge" };
 
-export const config = {
-  api: {
-    bodyParser: false, // let formidable handle it
-  },
-};
-
-export default async function handler(req, res) {
-
-  console.log("HF_API_KEY:", process.env.HF_API_KEY);
+export default async function handler(req) {
   if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
+    return new Response(JSON.stringify({ error: "Method not allowed" }), {
+      status: 405,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 
   try {
-    const form = formidable({ multiples: false });
-    const [fields, files] = await form.parse(req);
+    const formData = await req.formData();
+    const file = formData.get("image");
 
-    const file = files.image?.[0];
     if (!file) {
-      return res.status(400).json({ error: "No image provided" });
+      return new Response(JSON.stringify({ error: "No image provided" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      });
     }
 
-    const fileBuffer = fs.readFileSync(file.filepath);
+    const arrayBuffer = await file.arrayBuffer();
 
+    // Call HuggingFace model
     const hfRes = await fetch(
       "https://api-inference.huggingface.co/models/briaai/RMBG-1.4",
       {
@@ -33,22 +30,34 @@ export default async function handler(req, res) {
           Authorization: `Bearer ${process.env.HF_API_KEY}`,
           "Content-Type": "application/octet-stream",
         },
-        body: fileBuffer,
+        body: arrayBuffer,
       }
     );
 
     if (!hfRes.ok) {
       const errorText = await hfRes.text();
-      return res.status(hfRes.status).json({ error: errorText });
+      return new Response(JSON.stringify({ error: errorText }), {
+        status: hfRes.status,
+        headers: { "Content-Type": "application/json" },
+      });
     }
 
-    const buffer = Buffer.from(await hfRes.arrayBuffer());
+    const processedImage = await hfRes.blob();
 
-    res.setHeader("Content-Type", "image/png");
-    res.setHeader("Cache-Control", "no-store");
-    return res.send(buffer);
+    return new Response(processedImage, {
+      headers: {
+        "Content-Type": "image/png",
+        "Cache-Control": "no-store",
+      },
+    });
   } catch (err) {
     console.error("Error in remove-bg API:", err);
-    return res.status(500).json({ error: "Background removal failed." });
+    return new Response(
+      JSON.stringify({ error: "Background removal failed." }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
   }
 }
