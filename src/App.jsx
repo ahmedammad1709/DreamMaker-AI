@@ -8,7 +8,7 @@ import TTS from './components/TTS'
 import Chatbot from './components/chatbot'
 
 function App() {
-  const [activeView, setActiveView] = useState('text-to-image')
+  const [activeView, setActiveView] = useState('chatbot')
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-slate-900 relative">
