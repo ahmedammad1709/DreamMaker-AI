@@ -15,6 +15,17 @@ const Navbar = ({ activeView, setActiveView }) => {
 
           {/* Navigation Buttons */}
           <div className="flex flex-wrap md:flex-nowrap gap-2 bg-slate-700/50 rounded-lg p-1.5 backdrop-blur-sm">
+
+            <button
+              onClick={() => setActiveView('chatbot')}
+              className={`px-5 py-2.5 rounded-md font-medium transition-all ${activeView === 'chatbot'
+                ? 'bg-blue-600 text-white shadow-md'
+                : 'text-white/80 hover:text-white hover:bg-slate-600/70'
+                }`}
+            >
+              ChatBot
+            </button>
+
             <button
               onClick={() => setActiveView('text-to-image')}
               className={`px-5 py-2.5 rounded-md font-medium transition-all ${activeView === 'text-to-image'

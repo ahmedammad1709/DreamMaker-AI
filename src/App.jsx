@@ -5,6 +5,7 @@ import ImageToText from './components/ImageToText'
 import RemoveBG from './components/RemoveBG'
 import Footer from './components/Footer'
 import TTS from './components/TTS'
+import Chatbot from './components/chatbot'
 
 function App() {
   const [activeView, setActiveView] = useState('text-to-image')
@@ -19,7 +20,9 @@ function App() {
         <Navbar activeView={activeView} setActiveView={setActiveView} />
 
         <main className="container mx-auto px-4 py-12 min-h-[calc(100vh-200px)]">
-          {activeView === 'text-to-image' ? (
+          {activeView === 'chatbot' ? (
+            <Chatbot />
+          ) : activeView === 'text-to-image' ? (
             <TextToImage />
           ) : activeView === 'image-to-text' ? (
             <ImageToText />
