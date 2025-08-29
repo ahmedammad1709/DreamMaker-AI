@@ -8,7 +8,7 @@ const Navbar = ({ activeView, setActiveView }) => {
           {/* Logo/Heading */}
           <div className="mb-4 md:mb-0">
             <h1 className="text-3xl md:text-4xl font-bold text-white">
-              Dream<span className="text-blue-400">Maker</span>
+              Gen<span className="text-blue-400">Craft</span>
             </h1>
           </div>
 
@@ -17,8 +17,8 @@ const Navbar = ({ activeView, setActiveView }) => {
             <button
               onClick={() => setActiveView('text-to-image')}
               className={`px-5 py-2.5 rounded-md font-medium transition-all ${activeView === 'text-to-image'
-                  ? 'bg-blue-600 text-white shadow-md'
-                  : 'text-white/80 hover:text-white hover:bg-slate-600/70'
+                ? 'bg-blue-600 text-white shadow-md'
+                : 'text-white/80 hover:text-white hover:bg-slate-600/70'
                 }`}
             >
               Text to Image
@@ -26,8 +26,8 @@ const Navbar = ({ activeView, setActiveView }) => {
             <button
               onClick={() => setActiveView('image-to-text')}
               className={`px-5 py-2.5 rounded-md font-medium transition-all ${activeView === 'image-to-text'
-                  ? 'bg-blue-600 text-white shadow-md'
-                  : 'text-white/80 hover:text-white hover:bg-slate-600/70'
+                ? 'bg-blue-600 text-white shadow-md'
+                : 'text-white/80 hover:text-white hover:bg-slate-600/70'
                 }`}
             >
               Image to Text
@@ -35,8 +35,8 @@ const Navbar = ({ activeView, setActiveView }) => {
             <button
               onClick={() => setActiveView('remove-bg')}
               className={`px-5 py-2.5 rounded-md font-medium transition-all ${activeView === 'remove-bg'
-                  ? 'bg-blue-600 text-white shadow-md'
-                  : 'text-white/80 hover:text-white hover:bg-slate-600/70'
+                ? 'bg-blue-600 text-white shadow-md'
+                : 'text-white/80 hover:text-white hover:bg-slate-600/70'
                 }`}
             >
               Remove Background
@@ -44,8 +44,8 @@ const Navbar = ({ activeView, setActiveView }) => {
             <button
               onClick={() => setActiveView('tts')}
               className={`px-5 py-2.5 rounded-md font-medium transition-all ${activeView === 'tts'
-                  ? 'bg-blue-600 text-white shadow-md'
-                  : 'text-white/80 hover:text-white hover:bg-slate-600/70'
+                ? 'bg-blue-600 text-white shadow-md'
+                : 'text-white/80 hover:text-white hover:bg-slate-600/70'
                 }`}
             >
               Text to Speech
