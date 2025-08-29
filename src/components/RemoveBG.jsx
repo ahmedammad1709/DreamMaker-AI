@@ -72,21 +72,30 @@ const RemoveBG = () => {
       const imageData = await downscaleIfNeeded(file)
       
       const formData = new FormData()
-      formData.append('image', imageData)
+      formData.append('image_file', imageData)
+      formData.append('size', 'auto')
 
-      const response = await fetch('/api/remove-bg', {
+      // Direct API call to remove.bg
+      const apiKey = import.meta.env.VITE_REMOVE_BG_API_KEY
+      
+      if (!apiKey) {
+        throw new Error('API key not found. Please add VITE_REMOVE_BG_API_KEY to your .env.local file')
+      }
+      
+      console.log('API Key available:', apiKey ? 'Yes' : 'No')
+      
+      const response = await fetch('https://api.remove.bg/v1.0/removebg', {
         method: 'POST',
+        headers: {
+          'X-Api-Key': apiKey
+        },
         body: formData,
       })
 
       if (!response.ok) {
         const errorText = await response.text()
-        try {
-          const errorData = JSON.parse(errorText)
-          throw new Error(errorData.error || 'Failed to remove background')
-        } catch (e) {
-          throw new Error('Failed to process image: ' + (errorText || response.statusText))
-        }
+        console.error('Error from remove.bg:', errorText)
+        throw new Error('Failed to process image: ' + response.statusText)
       }
 
       const blob = await response.blob()
