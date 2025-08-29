@@ -218,6 +218,26 @@ const RemoveBG = () => {
               </button>
             </div>
           )}
+          
+          {processedImage && (
+            <div className="mt-6 text-center">
+              <button
+                onClick={() => {
+                  setProcessedImage(null);
+                  setSelectedImage(null);
+                  setPreviewUrl(null);
+                }}
+                className="px-6 py-3 text-base font-medium bg-slate-600 hover:bg-slate-700 text-white rounded-md transition-colors shadow-md"
+              >
+                <div className="flex items-center justify-center">
+                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                  </svg>
+                  <span>Back</span>
+                </div>
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Result Image Section */}
