@@ -103,41 +103,41 @@ const RemoveBG = () => {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="text-center mb-8">
-        <h2 className="text-4xl font-bold text-white mb-4">
-          Remove Image Background
+        <h2 className="text-3xl font-bold text-white mb-3">
+          Remove Image Backgrounds
         </h2>
-        <p className="text-xl text-white/70">
-          Upload an image and get a transparent background version instantly
+        <p className="text-lg text-slate-300">
+          Upload an image and get a clean, background-free result in seconds
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Image Upload Section */}
-        <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 shadow-xl">
-          <h3 className="text-2xl font-semibold text-white mb-4">Upload Image</h3>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Original Image Section */}
+        <div className="bg-slate-800/70 backdrop-blur-md rounded-lg p-6 border border-slate-700/50 shadow-lg">
+          <h3 className="text-xl font-medium text-white mb-4">Original Image</h3>
 
           <div
+            className={`border-2 border-dashed rounded-lg p-6 text-center transition-all ${previewUrl
+                ? 'border-blue-400 bg-blue-500/10'
+                : 'border-slate-600/50 hover:border-blue-400 hover:bg-slate-700/50'
+              }`}
             onDrop={handleDrop}
             onDragOver={handleDragOver}
-            className={`border-2 border-dashed rounded-xl p-6 text-center transition-all duration-300 ${previewUrl
-                ? 'border-purple-400 bg-purple-500/10'
-                : 'border-white/30 hover:border-purple-400 hover:bg-white/5'
-              }`}
           >
             {previewUrl ? (
               <div className="space-y-4">
                 <img
                   src={previewUrl}
                   alt="Preview"
-                  className="max-w-full h-auto rounded-lg mx-auto shadow-lg"
+                  className="max-w-full h-auto rounded-md mx-auto shadow-md border border-slate-600/30"
                 />
                 <div className="space-y-2">
-                  <p className="text-white/80 text-sm">
+                  <p className="text-slate-300 text-sm">
                     {selectedImage?.name}
                   </p>
                   <button
                     onClick={clearSelection}
-                    className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors"
+                    className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md transition-colors text-sm"
                   >
                     Remove Image
                   </button>
@@ -145,18 +145,30 @@ const RemoveBG = () => {
               </div>
             ) : (
               <div className="space-y-4">
-                <div className="text-6xl text-white/50">🖼️</div>
-                <p className="text-white/70">
-                  Drag and drop an image here, or click to browse
+                <svg 
+                  className="w-14 h-14 mx-auto text-slate-400" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    strokeWidth={1.5} 
+                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" 
+                  />
+                </svg>
+                <p className="text-slate-300">
+                  Drag & drop your image here, or click to select
                 </p>
-                <p className="text-white/50 text-sm">
+                <p className="text-slate-400 text-sm">
                   Supports JPG and PNG formats
                 </p>
                 <button
                   onClick={() => fileInputRef.current?.click()}
-                  className="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105"
+                  className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors text-sm"
                 >
-                  Choose Image
+                  Select Image
                 </button>
               </div>
             )}
@@ -170,19 +182,25 @@ const RemoveBG = () => {
              className="hidden"
             />
 
-          {selectedImage && (
+          {error && (
+            <div className="mt-4 p-4 bg-red-500/10 border border-red-400/20 rounded-md">
+              <p className="text-red-300 text-center">{error}</p>
+            </div>
+          )}
+
+          {selectedImage && !processedImage && !isProcessing && (
             <div className="mt-6 text-center">
               <button
                 onClick={handleRemoveBackground}
                 disabled={isProcessing}
-                className={`px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed ${isProcessing
-                    ? 'bg-gray-500 text-white'
-                    : 'bg-gradient-to-r from-green-500 to-blue-500 text-white shadow-lg shadow-green-500/25 hover:shadow-xl hover:shadow-green-500/40'
+                className={`px-6 py-3 text-base font-medium rounded-md transition-all disabled:opacity-50 disabled:cursor-not-allowed ${isProcessing
+                    ? 'bg-slate-600 text-white'
+                    : 'bg-blue-600 hover:bg-blue-700 text-white shadow-md'
                   }`}
               >
                 {isProcessing ? (
                   <div className="flex items-center justify-center space-x-2">
-                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                     <span>Processing...</span>
                   </div>
                 ) : (
@@ -193,49 +211,50 @@ const RemoveBG = () => {
           )}
         </div>
 
-        {/* Processed Image Section */}
-        <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 shadow-xl">
-          <h3 className="text-2xl font-semibold text-white mb-4">Processed Image</h3>
+        {/* Result Image Section */}
+        <div className="bg-slate-800/70 backdrop-blur-md rounded-lg p-6 border border-slate-700/50 shadow-lg">
+          <h3 className="text-xl font-medium text-white mb-4">Result</h3>
 
           {processedImage ? (
-            <div className="space-y-4">
-              <div className="bg-[url('/checkerboard.svg')] bg-repeat rounded-lg p-2">
+            <div className="space-y-6">
+              <div className="flex justify-center">
                 <img
                   src={processedImage}
                   alt="Processed"
-                  className="max-w-full h-auto rounded-lg mx-auto"
+                  className="max-w-full h-auto rounded-md shadow-lg border border-slate-600/30"
                 />
               </div>
-              <div className="text-center mt-4">
-                <button
-                  onClick={handleDownload}
-                  className="inline-flex items-center px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors cursor-pointer"
+              <div className="text-center">
+                <a
+                  href={processedImage}
+                  download="removed-background.png"
+                  className="inline-flex items-center px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors text-sm"
                 >
                   <FaDownload className="mr-2" />
                   Download Image
-                </button>
+                </a>
               </div>
             </div>
           ) : (
-            <div className="bg-white/20 rounded-xl p-8 border border-white/30 text-center h-64 flex flex-col items-center justify-center">
-              <div className="text-4xl text-white/50 mb-2">✨</div>
-              <p className="text-white/70">
+            <div className="bg-slate-700/50 rounded-lg p-8 border border-slate-600/30 text-center">
+              <svg 
+                className="w-12 h-12 mx-auto text-slate-400 mb-2" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  strokeWidth={1.5} 
+                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" 
+                />
+              </svg>
+              <p className="text-slate-300">
                 {selectedImage
                   ? 'Click "Remove Background" to process your image'
-                  : 'Upload an image to get started'
-                }
+                  : 'Upload an image to get started'}
               </p>
-              {error && (
-                <p className="text-red-300 mt-4 p-2 bg-red-500/20 rounded-lg">
-                  {error}
-                </p>
-              )}
-              {isProcessing && (
-                <div className="mt-4">
-                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mx-auto"></div>
-                  <p className="text-white/70 mt-2">Processing your image...</p>
-                </div>
-              )}
             </div>
           )}
         </div>

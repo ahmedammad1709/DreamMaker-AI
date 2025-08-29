@@ -126,17 +126,17 @@ const TextToImage = () => {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="text-center mb-8">
-        <h2 className="text-4xl font-bold text-white mb-4">
+        <h2 className="text-3xl font-bold text-white mb-3">
           Transform Your Ideas Into Images
         </h2>
-        <p className="text-xl text-white/70">
+        <p className="text-lg text-slate-300">
           Describe what you want to see, and watch AI bring it to life
         </p>
       </div>
 
-      <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 shadow-xl">
-        <div className="mb-6">
-          <label htmlFor="prompt" className="block text-lg font-medium text-white mb-3">
+      <div className="bg-slate-800/70 backdrop-blur-md rounded-lg p-6 border border-slate-700/50 shadow-lg">
+        <div className="mb-5">
+          <label htmlFor="prompt" className="block text-base font-medium text-white mb-2">
             Describe Your Image
           </label>
           <textarea
@@ -144,17 +144,17 @@ const TextToImage = () => {
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
             placeholder="A serene mountain landscape at sunset with a crystal clear lake reflecting the sky..."
-            className="w-full h-32 px-4 py-3 bg-white/20 border border-white/30 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent resize-none backdrop-blur-sm"
+            className="w-full h-32 px-4 py-3 bg-slate-700/50 border border-slate-600/50 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none backdrop-blur-sm"
           />
         </div>
 
         {error && (
-          <div className="mb-6 p-4 bg-red-500/20 border border-red-500/30 rounded-xl">
-            <p className="text-red-300 text-center mb-3">{error}</p>
+          <div className="mb-5 p-4 bg-red-500/10 border border-red-400/20 rounded-md">
+            <p className="text-red-300 text-center mb-2">{error}</p>
             <div className="text-center">
               <button
                 onClick={handleRetry}
-                className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors"
+                className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md transition-colors text-sm"
               >
                 Try Again
               </button>
@@ -166,14 +166,14 @@ const TextToImage = () => {
           <button
             onClick={handleGenerate}
             disabled={!prompt.trim() || isGenerating}
-            className={`px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed ${isGenerating
-                ? 'bg-gray-500 text-white'
-                : 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg shadow-purple-500/25 hover:shadow-xl hover:shadow-purple-500/40'
+            className={`px-6 py-3 text-base font-medium rounded-md transition-all disabled:opacity-50 disabled:cursor-not-allowed ${isGenerating
+              ? 'bg-slate-600 text-white'
+              : 'bg-blue-600 hover:bg-blue-700 text-white shadow-md'
               }`}
           >
             {isGenerating ? (
               <div className="flex items-center justify-center space-x-2">
-                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                 <span>Generating...</span>
               </div>
             ) : (
@@ -181,21 +181,17 @@ const TextToImage = () => {
             )}
           </button>
         </div>
-
-        <div className="mt-4 text-center">
-
-        </div>
       </div>
 
       {generatedImage && (
-        <div className="mt-8 animate-fade-in">
-          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 shadow-xl">
-            <h3 className="text-2xl font-semibold text-white mb-4 text-center">Your Generated Image</h3>
+        <div className="mt-8">
+          <div className="bg-slate-800/70 backdrop-blur-md rounded-lg p-5 border border-slate-700/50 shadow-lg">
+            <h3 className="text-xl font-medium text-white mb-4 text-center">Your Generated Image</h3>
             <div className="flex justify-center">
               <img
                 src={generatedImage}
                 alt="Generated from text description"
-                className="max-w-full h-auto rounded-xl shadow-2xl border border-white/20"
+                className="max-w-full h-auto rounded-md shadow-lg border border-slate-600/30"
                 onError={(e) => {
                   e.target.style.display = 'none'
                   setError('Failed to load generated image')
@@ -203,13 +199,13 @@ const TextToImage = () => {
               />
             </div>
             <div className="mt-4 text-center">
-              <p className="text-white/70 text-sm mb-3">
+              <p className="text-slate-300 text-sm mb-3">
                 Prompt: <span className="text-white font-medium">"{prompt}"</span>
               </p>
               <a
                 href={generatedImage}
                 download="generated-image.png"
-                className="inline-block px-6 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors"
+                className="inline-block px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors text-sm"
                 target="_blank"
                 rel="noopener noreferrer"
               >

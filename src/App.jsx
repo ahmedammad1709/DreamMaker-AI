@@ -9,20 +9,26 @@ function App() {
   const [activeView, setActiveView] = useState('text-to-image')
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      <Navbar activeView={activeView} setActiveView={setActiveView} />
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-slate-900 relative">
+      {/* Subtle pattern overlay */}
+      <div className="absolute inset-0 bg-[url('/checkerboard.svg')] opacity-5 z-0"></div>
+      
+      {/* Content */}
+      <div className="relative z-10">
+        <Navbar activeView={activeView} setActiveView={setActiveView} />
 
-      <main className="container mx-auto px-4 py-8 min-h-[calc(100vh-200px)]">
-        {activeView === 'text-to-image' ? (
-          <TextToImage />
-        ) : activeView === 'image-to-text' ? (
-          <ImageToText />
-        ) : (
-          <RemoveBG />
-        )}
-      </main>
+        <main className="container mx-auto px-4 py-12 min-h-[calc(100vh-200px)]">
+          {activeView === 'text-to-image' ? (
+            <TextToImage />
+          ) : activeView === 'image-to-text' ? (
+            <ImageToText />
+          ) : (
+            <RemoveBG />
+          )}
+        </main>
 
-      <Footer />
+        <Footer />
+      </div>
     </div>
   )
 }
