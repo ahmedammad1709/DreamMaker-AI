@@ -6,7 +6,8 @@ const Navbar = ({ activeView, setActiveView }) => {
       <div className="container mx-auto px-6 py-4">
         <div className="flex flex-col md:flex-row items-center justify-between">
           {/* Logo/Heading */}
-          <div className="mb-4 md:mb-0">
+          <div className="mb-4 md:mb-0 flex items-center gap-3">
+            <img src="/images/logo.png" alt="Logo" className="h-10 w-10" />
             <h1 className="text-3xl md:text-4xl font-bold text-white">
               Gen<span className="text-blue-400">Craft</span>
             </h1>
