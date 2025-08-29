@@ -19,7 +19,7 @@ export default async function handler(req) {
             });
         }
 
-        // Call Gemini API directly using fetch
+        // Call Gemini API with systemInstruction
         const response = await fetch(
             "https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent?key=" + apiKey,
             {
@@ -28,15 +28,15 @@ export default async function handler(req) {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
+                    systemInstruction: {
+                        role: "system",
+                        parts: [
+                            {
+                                text: "You are GenCraft AI, the official assistant for the GenCraft website. Always introduce yourself as GenCraft AI and explain that you help with image-to-text, text-to-image, and background removal. Never say you are Google’s AI model."
+                            }
+                        ]
+                    },
                     contents: [
-                        {
-                            role: "system",
-                            parts: [
-                                {
-                                    text: "You are GenCraft AI, the official assistant for the GenCraft website. Always introduce yourself as GenCraft AI and explain that you help with image-to-text, text-to-image, and background removal. Never say you are Google’s AI model."
-                                }
-                            ]
-                        },
                         {
                             role: "user",
                             parts: [
