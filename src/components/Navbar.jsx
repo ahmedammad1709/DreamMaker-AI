@@ -11,38 +11,44 @@ const Navbar = ({ activeView, setActiveView }) => {
               Dream<span className="text-blue-400">Maker</span>
             </h1>
           </div>
-          
+
           {/* Navigation Buttons */}
           <div className="flex flex-wrap md:flex-nowrap gap-2 bg-slate-700/50 rounded-lg p-1.5 backdrop-blur-sm">
             <button
               onClick={() => setActiveView('text-to-image')}
-              className={`px-5 py-2.5 rounded-md font-medium transition-all ${
-                activeView === 'text-to-image'
+              className={`px-5 py-2.5 rounded-md font-medium transition-all ${activeView === 'text-to-image'
                   ? 'bg-blue-600 text-white shadow-md'
                   : 'text-white/80 hover:text-white hover:bg-slate-600/70'
-              }`}
+                }`}
             >
               Text to Image
             </button>
             <button
               onClick={() => setActiveView('image-to-text')}
-              className={`px-5 py-2.5 rounded-md font-medium transition-all ${
-                activeView === 'image-to-text'
+              className={`px-5 py-2.5 rounded-md font-medium transition-all ${activeView === 'image-to-text'
                   ? 'bg-blue-600 text-white shadow-md'
                   : 'text-white/80 hover:text-white hover:bg-slate-600/70'
-              }`}
+                }`}
             >
               Image to Text
             </button>
             <button
               onClick={() => setActiveView('remove-bg')}
-              className={`px-5 py-2.5 rounded-md font-medium transition-all ${
-                activeView === 'remove-bg'
+              className={`px-5 py-2.5 rounded-md font-medium transition-all ${activeView === 'remove-bg'
                   ? 'bg-blue-600 text-white shadow-md'
                   : 'text-white/80 hover:text-white hover:bg-slate-600/70'
-              }`}
+                }`}
             >
               Remove Background
+            </button>
+            <button
+              onClick={() => setActiveView('tts')}
+              className={`px-5 py-2.5 rounded-md font-medium transition-all ${activeView === 'tts'
+                  ? 'bg-blue-600 text-white shadow-md'
+                  : 'text-white/80 hover:text-white hover:bg-slate-600/70'
+                }`}
+            >
+              Text to Speech
             </button>
           </div>
         </div>

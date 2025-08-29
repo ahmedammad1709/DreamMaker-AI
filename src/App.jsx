@@ -4,6 +4,7 @@ import TextToImage from './components/TextToImage'
 import ImageToText from './components/ImageToText'
 import RemoveBG from './components/RemoveBG'
 import Footer from './components/Footer'
+import TTS from './components/TTS'
 
 function App() {
   const [activeView, setActiveView] = useState('text-to-image')
@@ -12,7 +13,7 @@ function App() {
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-slate-900 relative">
       {/* Subtle pattern overlay */}
       <div className="absolute inset-0 bg-[url('/checkerboard.svg')] opacity-5 z-0"></div>
-      
+
       {/* Content */}
       <div className="relative z-10">
         <Navbar activeView={activeView} setActiveView={setActiveView} />
@@ -22,8 +23,10 @@ function App() {
             <TextToImage />
           ) : activeView === 'image-to-text' ? (
             <ImageToText />
-          ) : (
+          ) : activeView === 'remove-bg' ? (
             <RemoveBG />
+          ) : (
+            <TTS />
           )}
         </main>
 
